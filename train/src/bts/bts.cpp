@@ -1,4 +1,4 @@
-#include <bts/bts.h>
+#include "bts.h"
 
 
 AtrousConvImpl::AtrousConvImpl(int64_t in_channels, int64_t out_channels, int64_t dilation, bool apply_bn_first)
@@ -324,9 +324,3 @@ void weights_init_xavier(torch::nn::Module& module) {
         }
     }
 }
-
-
-
-
-
-

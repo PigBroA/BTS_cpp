@@ -4,10 +4,9 @@
 #include <torch/torch.h>
 #include <torch/nn/functional.h>
 #include <torch/utils.h>
-#include <opencv2/opencv.hpp>
 
-#include <bts/util.h>
-#include <bts/densenet.h>
+#include "util.h"
+#include "densenet.h"
 
 
 class AtrousConvImpl : public torch::nn::Module {
@@ -108,16 +107,16 @@ TORCH_MODULE(Encoder);
 
 class BTSImpl : public torch::nn::Module {
 public:
-    BTSImpl(std::string dataset, float max_depth = 80.0,
+    BTSImpl(std::string dataset = "", float max_depth = 80.0,
             std::vector<int64_t> feat_out_channels = {96, 96, 192, 384, 2208}, int64_t num_features = 512,
             int64_t growth_rate = 48, std::vector<int64_t> block_config = {6, 12, 36, 24},
             int64_t num_init_features = 96, int64_t bn_size = 4, float drop_rate = 0.0, int64_t num_classes = 1000, bool memory_efficient = false,
             std::vector<std::string> feat_names = {"relu0", "pool0", "transition1", "transition2", "norm5"});
     //focal is just need for KITTI. don't need for another db, if the db has just one focal length(just push is the value, but it doesn't be used).
     std::tuple<torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor, torch::Tensor> forward(torch::Tensor skip_feat, torch::Tensor focal);
+private:
     Encoder encoder;
     Decoder decoder;
-private:
 };
 TORCH_MODULE(BTS);
 

@@ -1,4 +1,4 @@
-#include <bts/densenet.h>
+#include "densenet.h"
 
 
 _DenseLayerImpl::_DenseLayerImpl(int64_t num_input_features, int64_t growth_rate, int64_t bn_size, float drop_rate, bool memory_efficient)
@@ -105,7 +105,7 @@ StackSequential _Transition(int64_t num_input_features, int64_t num_output_featu
 DenseNetImpl::DenseNetImpl(int64_t growth_rate, std::vector<int64_t> block_config,
                            int64_t num_init_features, int64_t bn_size, float drop_rate, int64_t num_classes, bool memory_efficient)
     : features(),
-      classifier(1, 1) {
+      classifier(nullptr) {
     this->features->push_back("conv0", torch::nn::Conv2d(torch::nn::Conv2dOptions(3, num_init_features, 7).stride(2).padding(3).bias(false)));
     this->features->push_back("norm0", torch::nn::BatchNorm2d(torch::nn::BatchNorm2dOptions(num_init_features)));
     this->features->push_back("relu0", torch::nn::ReLU(torch::nn::ReLUOptions(true)));

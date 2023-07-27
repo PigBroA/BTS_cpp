@@ -2,6 +2,6 @@
 <launch>
 	<node name="inference_bts" pkg="inference_bts" type="inference_bts" output="screen">
 		<param name="imgTopic" value="/front_60degree_camera/compressed" />
-		<param name="modelWeightName" value="$(find inference_bts)/data/20230317/01000+model.pt" />
+		<param name="modelWeightName" value="$(find inference_bts)/data/bts_outdoor.pt" />
 	</node>
 </launch>

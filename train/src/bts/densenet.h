@@ -5,7 +5,7 @@
 #include <torch/nn/functional.h>
 #include <torch/utils.h>
 
-#include <bts/util.h>
+#include "util.h"
 
 
 class _DenseLayerImpl : public torch::nn::Module {

@@ -4,10 +4,9 @@
 #include <torch/torch.h>
 #include <torch/nn/functional.h>
 #include <torch/utils.h>
-#include <opencv2/opencv.hpp>
 
-#include <bts/util.h>
-#include <bts/densenet.h>
+#include "util.h"
+#include "densenet.h"
 
 
 class AtrousConvImpl : public torch::nn::Module {
@@ -108,7 +107,7 @@ TORCH_MODULE(Encoder);
 
 class BTSImpl : public torch::nn::Module {
 public:
-    BTSImpl(std::string dataset, float max_depth = 80.0,
+    BTSImpl(std::string dataset = "", float max_depth = 80.0,
             std::vector<int64_t> feat_out_channels = {96, 96, 192, 384, 2208}, int64_t num_features = 512,
             int64_t growth_rate = 48, std::vector<int64_t> block_config = {6, 12, 36, 24},
             int64_t num_init_features = 96, int64_t bn_size = 4, float drop_rate = 0.0, int64_t num_classes = 1000, bool memory_efficient = false,
